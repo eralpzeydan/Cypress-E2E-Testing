@@ -1,8 +1,11 @@
 /// <reference types="Cypress" />
 
+
 describe('contact form ', () => {
+    beforeEach( ()=> {
+        cy.visit('/about');
+    });
     it('should submit the from', () => {
-        cy.visit('http://localhost:5173/about')
         cy.get('[data-cy="contact-input-message"]').type('Hello World!');
         cy.get('[data-cy="contact-input-name"]').type('eralp zeydan');
         cy.get('[data-cy="contact-input-email"]').type('test@example.com');
@@ -24,7 +27,6 @@ describe('contact form ', () => {
     });
 
     it('should validate the form input', () => {
-        cy.visit('http://localhost:5173/about')
         cy.get('[data-cy="contact-btn-submit"]').click();
         cy.get('[data-cy="contact-btn-submit"]').then( (el) => {
             expect(el).to.not.have.attr('disabled');
